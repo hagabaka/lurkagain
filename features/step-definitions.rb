@@ -5,7 +5,6 @@ Given /^I have the following network file:$/ do |string|
 end                                                                                                                                            
                                                                                                                                                
 When /^I parse the file$/ do                                                                                                                   
-  require 'treetop'
   require 'lurkagain/clients/chatzilla/networks'
   @parser = LurkAgain::Clients::Chatzilla::NetworksParser.new
   @parse_result = @parser.parse @content
