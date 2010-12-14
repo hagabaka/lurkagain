@@ -1,6 +1,6 @@
 Feature: ChatZilla network file
   Scenario: Parse a network file
-    Given I have the following network file:
+    Given I have the following text:
       """
       START <Array>
         START 0
@@ -35,10 +35,10 @@ Feature: ChatZilla network file
         END
       END
       """ 
+    
+    When I use the "chatzilla/networks" parser to parse the text
 
-    When I parse the file
-
-    Then I should get the following network data:
+    Then I should get the following data:
       """
       - name: NetworkOne
         displayName: NetworkOne

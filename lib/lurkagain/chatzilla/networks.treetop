@@ -3,7 +3,7 @@ module LurkAgain
     grammar Networks
       rule file
         START_ARRAY line_end list END_FILE {
-          def networks
+          def data
             list.data
           end
         }
