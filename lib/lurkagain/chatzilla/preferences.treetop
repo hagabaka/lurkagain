@@ -1,0 +1,52 @@
+module LurkAgain
+  module Chatzilla
+    grammar Preferences
+      rule file
+        (line_comment / block_comment / preference / ' '/ "\n")+ {
+          def data
+            result = {}
+            elements.each do |node|
+              if node.respond_to? :setting
+                result[node.name.value] = node.setting.value
+              end
+            end
+            result
+          end
+        }
+      end
+    
+      rule line_comment
+        '#' [^\n]+ "\n"
+      end
+    
+      rule block_comment
+        '/*' ('*' !'/' / !'*' .)* '*/'
+      end
+      
+      rule preference
+        'user_pref("' name:string_segment '", ' setting ");"
+      end
+    
+      rule setting
+        'true'   { def value; true;                end } /
+        'false'  { def value; false;               end } /
+        [0-9]+   { def value; Integer(text_value); end } /
+        '"' first:string_segment rest:(';' ' '* string_segment)* '"' {
+          def value
+            [first, *rest.elements.map(&:string_segment)].map(&:value)
+          end
+        }
+      end
+    
+      rule string_segment
+        [^;"\n ]+ {
+          require 'uri'
+          def value
+            URI.decode text_value
+          end
+        }
+      end
+    end
+  end
+end
+
