@@ -26,9 +26,9 @@ Currently the development has just begun, and the only things working
 now are parsers for ChatZilla's network/server list and preference file,
 as well as code to locate ChatZilla's default profile.
 
+.. default-role: title-reference
 Dependencies
 ------------
-.. default-role: title-reference
 The project requires `Ruby` and the gems `iniparse`, and `treetop`. To
 run the test suite you need to install `rake`, `cucumber`, `rspec`, and
 `fakefs`, and run ``rake cucumber``.
@@ -38,5 +38,5 @@ Author
 Yaohan Chen (hagabaka) yaohan.chen@gmail.com
 
 The source code includes a copy of Mauricio Fernandez's
-``initialized-class.rb``, since it is not released as a gem.
+`initialized-class.rb`, since it is not released as a gem.
 
